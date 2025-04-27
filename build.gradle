@@ -1,0 +1,31 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java-library'
+}
+
+group = 'com.hyeon'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '21'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot 자동 설정
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    
+    // AOP
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    
+    // Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    
+    // Spring Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+}
+
+test {
+    useJUnitPlatform()
+}
