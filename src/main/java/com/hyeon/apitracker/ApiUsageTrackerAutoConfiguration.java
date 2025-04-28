@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
  */
 @Configuration
 @EnableAspectJAutoProxy
+@Import(ApiUsageMetricsController.class)
 @EnableConfigurationProperties(ApiUsageTrackerProperties.class)
 public class ApiUsageTrackerAutoConfiguration {
 
@@ -39,15 +41,7 @@ public class ApiUsageTrackerAutoConfiguration {
 
   @Bean
   @ConditionalOnMissingBean
-  public ApiUsageMetricsController apiUsageMetricsController(
-    CallCounterService callCounterService
-  ) {
-    return new ApiUsageMetricsController(callCounterService);
-  }
-
-  @Bean
-  @ConditionalOnMissingBean
   public ApiUsageAspect apiUsageAspect(CallCounterService callCounterService) {
-    return new ApiUsageAspect(callCounterService); // ✅ Aspect를 직접 등록한다
+    return new ApiUsageAspect(callCounterService);
   }
 }
