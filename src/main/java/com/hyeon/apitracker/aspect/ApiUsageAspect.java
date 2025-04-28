@@ -27,7 +27,10 @@ public class ApiUsageAspect {
     if (attributes != null) {
       HttpServletRequest request = attributes.getRequest();
       String path = request.getRequestURI();
+      System.out.println("🔥 AOP 트리거! 요청 경로: " + path);
       callCounterService.increment(path);
+    } else {
+      System.out.println("⚠️ AOP 트리거! but RequestAttributes가 null입니다.");
     }
   }
 }
